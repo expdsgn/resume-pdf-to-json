@@ -1,0 +1,38 @@
+{
+  "name": "resume-pdf-to-json",
+  "version": "1.0.0",
+  "description": "Parses a LinkedIn PDF and returns a JSON Object and/or outputs a JSON file.",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/expdesignio/resume-pdf-to-json.git"
+  },
+  "keywords": [
+    "linkedin",
+    "resume",
+    "pdf",
+    "json",
+    "static",
+    "templating"
+  ],
+  "author": "Devon Hirth <devon@expdesign.io> (//expdesign.io)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/expdesignio/resume-pdf-to-json/issues"
+  },
+  "homepage": "https://github.com/expdesignio/resume-pdf-to-json#readme",
+  "dependencies": {
+    "extend": "^3.0.0",
+    "jsonfile": "^2.2.3",
+    "pdf-text": "^0.4.0",
+    "promise": "^7.1.1"
+  },
+  "devDependencies": {
+    "chai": "^3.4.1",
+    "chai-as-promised": "^5.2.0",
+    "mocha": "^2.3.4"
+  }
+}
