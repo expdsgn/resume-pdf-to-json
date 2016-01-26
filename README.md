@@ -1,7 +1,7 @@
 # resume-pdf-to-json
 A Node module that parses a LinkedIn Resume PDF and returns a JSON Object and/or outputs a JSON file.
 
-LinkedIn Resume's are available on your profile under "View Profile As" > "Save to PDF."
+LinkedIn Resume's are available on your profile under **View Profile As** ▼ **Save to PDF**
 
 ## Installation
 
@@ -45,15 +45,15 @@ return resumePdfToJson(path, {'output': output})
 ```
 
 ### Support
-There are multiple sections of the LinkedIn PDF resume output, however, not all of them have been tested. The following sections have been accomodated for;
+There are multiple sections of the LinkedIn PDF resume output, however, not all have been tested. The following sections have been accomodated for;
 
-* Summary
-* Experience
-* Volunteer Experience
-* Skills & Expertise
-* Education
-* [number] person has recommended [name]
-* [number] people have recommended [name]
+- Summary
+- Experience
+- Volunteer Experience
+- Skills & Expertise
+- Education
+- [number] person has recommended [name]
+- [number] people have recommended [name]
 
-Better support for various sections may be added in the future.
+Support for additional sections may be added in the future.
 

@@ -26,8 +26,8 @@ var settings = {
         'Volunteer Experience',
         'Skills & Expertise',
         'Education',
-        '[number] person has recommended [name]',
-        '[number] people have recommended [name]'
+        'person has recommended',
+        'people have recommended'
     ],
     'subsections': [
         'Experience',
@@ -92,9 +92,13 @@ function resumePdfToJson(cb) {
 
     function indexHeaders(chunks) {
         var h, headers = [];
-        for (var i = settings.headers.length - 1; i >= 0; i--) {
-            h = settings.headers[i];
+        for (var sh = settings.headers.length - 1; sh >= 0; sh--) {
+            h = settings.headers[sh];
             if (chunks.indexOf(h) > -1) headers.push(chunks.indexOf(h));
+        }
+        // Look for recommendations
+        for (var ch = chunks.length - 1; ch >= 0; ch--) {
+            if ( service.isRecommendation(chunks[ch]) ) headers.push(ch);
         }
         headers.sort(function(a, b){return a - b;});
         for (var i = headers.length - 1; i >= 0; i--) {
@@ -188,7 +192,6 @@ function resumePdfToJson(cb) {
                 // people recommended and set next to false.
                 if (service.isRecommendation(line)) {
                     header = chunks[i - 1] + ' ' + line;
-                    next = false; // Recommendations are usually the last
                 }
 
                 cnt = cnt + 1;
@@ -226,6 +229,7 @@ function resumePdfToJson(cb) {
                 data[cnt].text = (t + ' ' + line).trim();
             }
 
+
             // set the subsection flag if the header is subsection
             if (settings.subsections.indexOf(header) !== -1) subsection = true;
 
@@ -234,6 +238,7 @@ function resumePdfToJson(cb) {
 
             // set the onelinesection flag if the header is a onelinesection
             if (settings.onelinesections.indexOf(header) !== -1) onelinesection = true;
+
 
             // if the next line is the section after the special section
             if (chunks[i + 1] === next || !next) {
@@ -289,6 +294,8 @@ function resumePdfToJson(cb) {
             }
 
         }
+
+        console.log(onelinesections);
 
         /**
          * Parse info for one line sections
