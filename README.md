@@ -44,3 +44,16 @@ return resumePdfToJson(path, {'output': output})
 
 ```
 
+### Support
+There are multiple sections of the LinkedIn PDF resume output, however, not all of them have been tested. The following sections have been accomodated for;
+
+• Summary
+• Experience
+• Volunteer Experience
+• Skills & Expertise
+• Education
+• [number] person has recommended [name]
+• [number] people have recommended [name]
+
+Better support for various sections may be added in the future.
+
