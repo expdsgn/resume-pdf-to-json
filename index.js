@@ -295,8 +295,6 @@ function resumePdfToJson(cb) {
 
         }
 
-        console.log(onelinesections);
-
         /**
          * Parse info for one line sections
          * Sub-sections are classified by groups of two lines
