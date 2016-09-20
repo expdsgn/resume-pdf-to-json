@@ -1,6 +1,6 @@
 {
   "name": "resume-pdf-to-json",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Parses a LinkedIn PDF and returns a JSON Object and/or outputs a JSON file.",
   "main": "index.js",
   "scripts": {

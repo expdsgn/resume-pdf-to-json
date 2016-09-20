@@ -174,6 +174,13 @@ function resumePdfToJson(cb) {
             }
         }
 
+        // clean out the page numbers
+        for (var y = 0; y < chunks.length; y++) {
+            if (service.isPageNum(chunks[y]) && chunks[y] === 'Page') {
+                chunks.splice(y, 2);
+            }
+        }
+
         // create index reference to reflect order of
         // headers in the pdf
         service.headers = service.indexHeaders(chunks);
@@ -185,7 +192,7 @@ function resumePdfToJson(cb) {
             if (service.skip(firstName, line)) continue;
 
             h = service.isHeader(line);
-            r = service.isRecommendation(line); //console.log(line);
+            r = service.isRecommendation(line);
 
             line = line.trim();
             line = service.replace(line);
@@ -218,17 +225,17 @@ function resumePdfToJson(cb) {
             // for parsing.
             if (subsection && !h && !r) {
                 if (!subsections[cnt]) subsections[cnt] = {'head': [header], 'text': []};
-                subsections[cnt].text.push(line); //console.log('subsection');
+                subsections[cnt].text.push(line);
             // if the section is a list section, just add
             // to the text as a list.
             } else if (listsection && !h && !r) {
-                data[cnt].text.push(line); //console.log('list');
+                data[cnt].text.push(line);
             // if this section is a one line section and
             // it is not a header save it in a different
             // array for parsing.
             } else if (onelinesection && !h && !r) {
                 if (!onelinesections[cnt]) onelinesections[cnt] = {'head': [header], 'text': []};
-                onelinesections[cnt].text.push(line); //console.log('oneline');
+                onelinesections[cnt].text.push(line);
 
             // if this section is a recommendation, not a header,
             // and not a recommendation header, parse it for the
@@ -250,7 +257,7 @@ function resumePdfToJson(cb) {
             } else if (data[cnt] && !service.isPageNum(line) && !h && !r) {
                 // concantenate the text.
                 t = data[cnt].text;
-                data[cnt].text = (t + ' ' + line).trim(); //console.log('normal');
+                data[cnt].text = (t + ' ' + line).trim();
             }
 
 
@@ -287,7 +294,7 @@ function resumePdfToJson(cb) {
 
             // some indexes are empty, skip them if they are
             if (typeof subsections[ss] === 'undefined') continue;
-            // console.log(typeof subsections[ss].text);
+
             text = subsections[ss].text;
             is = service.index(subsections[ss].head[0]);
 
@@ -320,7 +327,6 @@ function resumePdfToJson(cb) {
                 // the headline vars, add line to the section text.
                 } else if (line && !service.isPageNum(line) && head.indexOf(line) === -1) {
                     // concantentate section text
-                    // console.log(line);
                     t = data[is].sections[cnt].text;
                     data[is].sections[cnt].text = (t + ' ' + line).trim();
                 }
@@ -340,12 +346,10 @@ function resumePdfToJson(cb) {
 
             text = onelinesections[ol].text;
             is = service.index(onelinesections[ol].head[0]);
-
             // group the sections by two
             while (text.length > 0) {
                 groups.push(text.splice(0, 2));
             }
-
             // go through the groups and add them as sections.
             for (var g = 0; g < groups.length; g++) {
                 head = [ groups[g][0] ];
